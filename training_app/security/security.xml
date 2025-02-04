@@ -1,0 +1,5 @@
+<odoo>
+    <record id="training_manager_group" model="res.groups">
+        <field name="name">Purchase Manager</field>
+    </record>
+</odoo>

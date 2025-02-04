@@ -1,0 +1,65 @@
+<odoo>
+    <record id="purchase_requests_view_form" model="ir.ui.view">
+        <field name="name">purchase_requests_form</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                        <button name="change_state_to_be_approved" string="Submit for Approval"
+                                type="object" invisible="status not in ['draft']"/>
+                        <button name="change_state_cancelled" string="Cancelled"
+                                type="object" invisible="status not in ['draft']"/>
+                        <button name="change_state_approval" string="Approved"
+                                type="object" invisible="status not in ['to be approved']"/>
+                        <button name="change_state_reject" string="Reject"
+                                type="object" invisible="status not in ['to be approved']"/>
+                        <button name="change_state_draft" string="Reset To Draft"
+                                type="object" invisible="status not in ['cancelled']"/>
+                    </header>
+                    <group>
+                        <field name="name" readonly="status in ['approved','reject','cancelled']"/>
+                        <field name="requested_by" readonly="status in ['approved','reject','cancelled']"/>
+                        <field name="start_date" readonly="status in ['approved','reject','cancelled']"/>
+                        <field name="end_date" readonly="status in ['approved','reject','cancelled']"/>
+                        <field name="rejection_reason" invisible="status != 'reject'" readonly="status in ['approved','reject','cancelled']"/>
+                        <field name="total_price" readonly="status in ['approved','reject','cancelled']"/>
+                    </group>
+                    <notebook>
+                        <page string="Request Lines">
+                            <field name="order_lines" readonly="status in ['approved','reject','cancelled']">
+                                <tree editable="1">
+                                    <field name="product_id"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="cost_price"/>
+                                    <field name="total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_requests_action" model="ir.actions.act_window">
+        <field name="name">purchase requests</field>
+        <field name="res_model">purchase.request</field>
+
+    </record>
+    <menuitem id="purchase_requests_menu_item"
+              name="Purchase Requests"
+              parent="purchase.menu_procurement_management"
+              action="purchase_requests_action"
+
+    />
+
+
+</odoo>
