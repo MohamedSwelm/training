@@ -9,7 +9,8 @@ class RejectedReason(models.TransientModel):
     
     
     def action_confirm(self):
-        request_id = self.env['purchase.request'].search([('rejection_reason','=',self.purchase_request_id.rejection_reason)])
+        # request_id = self.env['purchase.request'].search([('rejection_reason','=',self.purchase_request_id.rejection_reason)])
+        request_id = self.env['purchase.request'].browse(self.env.context.get('active_ids'))
         print(request_id)
         request_id.write({
             'rejection_reason':self.rejection_reason,

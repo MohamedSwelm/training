@@ -17,7 +17,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','purchase'],
+    'depends': ['base','purchase','sale_management','stock'],
 
     # always loaded
     'data': [
@@ -25,7 +25,12 @@ Long description of module's purpose
         'security/security.xml',
         'views/purchase_request_view.xml',
         'wizards/rejected_reason_view.xml',
-        # 'data/email_template.xml',
+        'views/product_template_view.xml',
+        'views/sale_order_line_view.xml',
+        # 'views/stock_move_view.xml',
+        'views/stock_picking_view.xml',
+        'views/account_move_view.xml',
+
 
     ],
 }
