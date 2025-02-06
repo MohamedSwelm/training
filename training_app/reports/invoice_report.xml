@@ -1,0 +1,11 @@
+<odoo>
+    <template id="invoice_report_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[contains(@class, 'table table-sm o_main_table table-borderless')]" position="inside">
+            <th class="text-start" style="width: 10%;">Dimension</th>
+            <td class="text-start">
+                <t t-esc="line.dimension or 'N/A'"/>
+            </td>
+
+        </xpath>
+    </template>
+</odoo>
