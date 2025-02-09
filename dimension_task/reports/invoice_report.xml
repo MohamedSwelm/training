@@ -1,0 +1,17 @@
+<odoo>
+    <template id="invoice_report_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[contains(@class, 'table table-sm o_main_table table-borderless')]/thead/tr"
+               position="inside">
+            <th name="th-dimension" class="text-end">
+                <span>Dimension</span>
+            </th>
+        </xpath>
+
+        <xpath expr="//tbody[@class='invoice_tbody']//tr" position="inside">
+            <td name="td_dimension" class="text-end">
+                <span t-esc="line.dimension"/>
+            </td>
+        </xpath>
+
+    </template>
+</odoo>
